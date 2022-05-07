@@ -6,7 +6,7 @@ from PyQt5 import QtWidgets
 from misc import appgui
 
 # Инициализация вспомогательных скриптов
-from misc import gui_descriptor, writer
+from misc import kms, writer
 
 
 class KMSApplication(QtWidgets.QMainWindow, appgui.Ui_MainWindow):

@@ -1,6 +1,37 @@
 import hashlib
 
 
+def separate_delete(sep_string: str, sep="-"):
+    if len(sep_string) > 0:
+        while sep in sep_string:
+            sep_string.replace(sep, "")
+        return sep_string
+    else:
+        return None
+
+
+def separate_insert(sep_string: str, block_len=6):
+    if len(sep_string) > block_len:
+        pass
+    else:
+        return sep_string
+
+
+class SimpleKMS:
+    @staticmethod
+    def get_activation(reg_number: str):
+        reg_number = separate_delete(reg_number)
+
+    @staticmethod
+    def generate_licenses(value):
+        n = 1
+        licenes = []
+        while n <= value:
+            reg = ""
+            licenes.append([reg, SimpleKMS.get_activation(reg)])
+            n += 1
+
+
 class KMS:
 
     def __init__(self):
