@@ -3,7 +3,10 @@ import sys
 from PyQt5 import QtWidgets
 
 # Инициализация интерфейса
-import appgui
+from misc import appgui
+
+# Инициализация вспомогательных скриптов
+from misc import gui_descriptor, writer
 
 
 class KMSApplication(QtWidgets.QMainWindow, appgui.Ui_MainWindow):
