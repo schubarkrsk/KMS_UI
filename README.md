@@ -2,6 +2,7 @@
 
 ---
 #### IMPORTANT : Currently project in dev status. Many of features don't work / or work not correct. Please wait stable release
+#### IMPORTANT : README.md in dev status
 
 ---
 
