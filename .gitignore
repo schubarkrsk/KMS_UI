@@ -250,3 +250,4 @@ dmypy.json
 cython_debug/
 
 /build.bat
+.idea/*
