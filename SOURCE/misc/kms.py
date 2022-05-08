@@ -49,7 +49,7 @@ class SimpleKMS:
         while n <= value:
             reg = ""
             for i in range(6*4):
-                reg = reg + codes[random.randint(0, len(codes))]
+                reg = reg + codes[random.randint(0, len(codes)-1)]
 
             licenses.append([reg, SimpleKMS.get_activation(reg)])
             n += 1

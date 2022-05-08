@@ -17,16 +17,23 @@ class KMSApplication(QtWidgets.QMainWindow, appgui.Ui_MainWindow):
 
     def _ui_links(self):
         self.btn_gen.clicked.connect(self.btn_gen_clicked)
-        self.btn_genval.clicked.connect(self.btn_gen_val_clicked)
+        # self.btn_genval.clicked.connect(self.btn_gen_val_clicked)
 
     def btn_gen_clicked(self):
         serial = kms.separate_delete(self.serialNumber.text())
         activation = kms.SimpleKMS.get_activation(serial)
-        self.activation.text(activation)
+        textActiv = ""
+        for i in activation:
+            textActiv = textActiv + i + "-"
+        textActiv = textActiv[:len(textActiv)-1].upper()
+        self.activation.setText(textActiv)
 
 
     def btn_gen_val_clicked(self):
         value = self.spinBox.value()
+        licenses = kms.SimpleKMS.generate_licenses(value)
+        directory = QtWidgets.QFileDialog.getExistingDirectory(self, "Select floder to save licenses")
+        writer.save_in_file(licenses, directory)
 
 
 def main():
