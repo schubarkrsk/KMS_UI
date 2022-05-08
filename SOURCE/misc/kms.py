@@ -3,12 +3,8 @@ import random
 
 
 def separate_delete(sep_string: str, sep="-"):
-    if len(sep_string) > 0:
-        while sep in sep_string:
-            sep_string.replace(sep, "")
-        return sep_string
-    else:
-        return None
+    my = sep_string.replace(sep, "")
+    return my
 
 
 def separate_insert(sep_string: str, block_len=6):
@@ -22,18 +18,22 @@ class SimpleKMS:
     @staticmethod
     def get_activation(reg_number: str):
         reg_number = separate_delete(reg_number)
-        i = 0
+        i = 1
         activation = []
-        while i < 4:
-            current = reg_number[i*6:i*6-1]
+        while i <= 4:
+            # i * 6: i * 6 - 1
+            blockstart = i * 6 - 6
+            blockend = i * 6
+            current = reg_number[blockstart:blockend]
             md5hash = hashlib.md5(current.encode()).hexdigest()
-            activation.append(md5hash[:5])
+            activation.append(md5hash[:6])
+            i += 1
 
         checker = ""
         for i in activation:
             checker = checker + i
         checksum = hashlib.md5(checker.encode()).hexdigest()
-        activation.append(checksum[:5])
+        activation.append(checksum[:6])
         return activation
 
 
@@ -71,7 +71,6 @@ class KMS:
         """
         Set parameters to find license combination
         :param reg: registration number (string mod to 6, ex. XXXXXX-XXXXXX-...-XXXXXX is N block with 6 symbols each)
-        :param owner: string with name of license owner (using only in 2nd generation of licensing)
         """
         self.regnumb = reg
 
