@@ -16,7 +16,17 @@ class KMSApplication(QtWidgets.QMainWindow, appgui.Ui_MainWindow):
         self._ui_links()
 
     def _ui_links(self):
-        pass
+        self.btn_gen.clicked.connect(self.btn_gen_clicked)
+        self.btn_genval.clicked.connect(self.btn_gen_val_clicked)
+
+    def btn_gen_clicked(self):
+        serial = kms.separate_delete(self.serialNumber.text())
+        activation = kms.SimpleKMS.get_activation(serial)
+        self.activation.text(activation)
+
+
+    def btn_gen_val_clicked(self):
+        value = self.spinBox.value()
 
 
 def main():
