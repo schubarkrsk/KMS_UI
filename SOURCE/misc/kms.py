@@ -1,4 +1,5 @@
 import hashlib
+import random
 
 
 def separate_delete(sep_string: str, sep="-"):
@@ -21,15 +22,41 @@ class SimpleKMS:
     @staticmethod
     def get_activation(reg_number: str):
         reg_number = separate_delete(reg_number)
+        i = 0
+        activation = []
+        while i < 4:
+            current = reg_number[i*6:i*6-1]
+            md5hash = hashlib.md5(current.encode()).hexdigest()
+            activation.append(md5hash[:5])
+
+        checker = ""
+        for i in activation:
+            checker = checker + i
+        checksum = hashlib.md5(checker.encode()).hexdigest()
+        activation.append(checksum[:5])
+        return activation
+
+
+
 
     @staticmethod
     def generate_licenses(value):
+        codes = (
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'L', 'M', 'N', 'P', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z',
+            '2', '3', '4', '5', '6', '7', '8', '9')
         n = 1
-        licenes = []
+        licenses = []
         while n <= value:
             reg = ""
-            licenes.append([reg, SimpleKMS.get_activation(reg)])
+            for i in range(6*4):
+                reg = reg + codes[random.randint(0, len(codes))]
+
+            licenses.append([reg, SimpleKMS.get_activation(reg)])
             n += 1
+
+        return licenses
+
+
 
 
 class KMS:
